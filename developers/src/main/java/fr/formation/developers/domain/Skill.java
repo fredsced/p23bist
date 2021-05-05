@@ -1,5 +1,7 @@
 package fr.formation.developers.domain;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Classe qui représente une compétence simple avec son nom.
  * <p>
@@ -10,8 +12,8 @@ package fr.formation.developers.domain;
  */
 public class Skill {
 
-    // Variable d'instance private
-    private String name;
+    @NotNull
+    private String name; // Variable d'instance private
 
     /**
      * Construit un nouvel objet (instance) de type "Skill".

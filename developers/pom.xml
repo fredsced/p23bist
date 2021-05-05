@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- POM : Project Object Model, fichier de configuration de Maven pour aider à  gérer et configurer un projet Java (Spring ou pas) 
-et bien d'autres réjouissances comme le build (construction) ou le déploiement de l'application.
-Ce POM minimaliste déclare éssentiellement que le projet est un projet Spring boot avec ses dépendances et Java en indiquant la version. -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<!-- POM : Project Object Model, fichier de configuration de Maven pour aider 
+	à gérer et configurer un projet Java (Spring ou pas) et bien d'autres réjouissances 
+	comme le build (construction) ou le déploiement de l'application. Ce POM 
+	minimaliste déclare éssentiellement que le projet est un projet Spring boot 
+	avec ses dépendances et Java en indiquant la version. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
@@ -10,7 +13,7 @@ Ce POM minimaliste déclare éssentiellement que le projet est un projet Spring 
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<!-- La version de Spring boot -->
 		<version>2.4.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.formation</groupId>
 	<artifactId>developers</artifactId>
@@ -21,17 +24,26 @@ Ce POM minimaliste déclare éssentiellement que le projet est un projet Spring 
 		<!-- La version de Java utilisée dans le projet -->
 		<java.version>11</java.version>
 	</properties>
-	<!-- La liste des dépendances du projet, il peut s'agir de dépendances de différentes natures, pas nécessairement Spring (boot) : -->
+	<!-- La liste des dépendances du projet, il peut s'agir de dépendances de 
+		différentes natures, pas nécessairement Spring (boot) : -->
 	<dependencies>
-		<!-- La dépendance minimale pour implémenter une API Rest avec Spring boot.
-		Un starter est une spécificité de Spring boot, il s'agit d'un ensemble de dépendances
-		pour limiter le nombre de dépendances à déclarer individuellement. On peut voir la liste des
-		dépendances correspondantes dans l'arborescence du projet (Maven dependencies) 
-		ou encore sous Eclipse dans l'onglet Dependency Hierarchy du POM.
-		Les dépendances sont téléchargées d'Internet (URL par défaut) puis déposées dans un répertoire local (par défaut) de l'ordinateur ou du serveur. -->
+		<!-- La dépendance minimale pour implémenter une API Rest avec Spring boot. 
+			Un starter est une spécificité de Spring boot, il s'agit d'un ensemble de 
+			dépendances pour limiter le nombre de dépendances à déclarer individuellement. 
+			On peut voir la liste des dépendances correspondantes dans l'arborescence 
+			du projet (Maven dependencies) ou encore sous Eclipse dans l'onglet Dependency 
+			Hierarchy du POM. Les dépendances sont téléchargées d'Internet (URL par défaut) 
+			puis déposées dans un répertoire local (par défaut) de l'ordinateur ou du 
+			serveur. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!-- Les dépendances pour la validation étaient présentes dans le starter-web
+		avant Spring boot 2.3, à partir de 2.3 il faut explicitement ajouter un starter -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

@@ -1,9 +1,12 @@
 package fr.formation.developers.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.formation.developers.domain.Skill;
@@ -48,6 +51,7 @@ import fr.formation.developers.domain.Skill;
  * de l'organisation du code.
  */
 @RestController
+@RequestMapping("/skills")
 public class SkillController {
 
     /**
@@ -69,7 +73,7 @@ public class SkillController {
      * @param id un identifiant de compétence
      * @return la compétence dont l'identifiant est "id"
      */
-    @GetMapping("/skills/{id}")
+    @GetMapping("/{id}")
     public Skill getById(@PathVariable("id") Long id) {
 	Skill skill = new Skill();
 	skill.setName("Spring boot " + id);
@@ -91,8 +95,8 @@ public class SkillController {
      * @param skill les données JSON reçues converties en une instance de
      *        "Skill"
      */
-    @PostMapping("/skills")
-    public void create(@RequestBody Skill skill) {
+    @PostMapping
+    public void create(@Valid @RequestBody Skill skill) {
 	System.out.println(skill);
     }
 }
