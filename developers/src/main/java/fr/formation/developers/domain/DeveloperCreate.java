@@ -2,17 +2,23 @@ package fr.formation.developers.domain;
 
 import java.time.LocalDate;
 
-public class Developer {
+import javax.validation.constraints.NotNull;
 
+public class DeveloperCreate {
+
+    @NotNull
     private String pseudo;
 
+    @NotNull
     private String firstName;
 
+    @NotNull
     private String lastName;
 
+    @NotNull
     private LocalDate birthDate;
 
-    public Developer() {
+    public DeveloperCreate() {
 	//
     }
 

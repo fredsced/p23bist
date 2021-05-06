@@ -2,6 +2,8 @@ package fr.formation.developers.controllers;
 
 import java.time.LocalDate;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.formation.developers.domain.Developer;
+import fr.formation.developers.domain.DeveloperCreate;
+import fr.formation.developers.domain.DeveloperUpdate;
 
 @RestController
 /*
@@ -24,8 +27,8 @@ import fr.formation.developers.domain.Developer;
 public class DeveloperController {
 
     @GetMapping("/{pseudo}")
-    public Developer getByPseudo(@PathVariable("pseudo") String pseudo) {
-	Developer developer = new Developer();
+    public DeveloperCreate getByPseudo(@PathVariable("pseudo") String pseudo) {
+	DeveloperCreate developer = new DeveloperCreate();
 	developer.setPseudo(pseudo);
 	developer.setFirstName("Frank");
 	developer.setLastName("MARSHALL");
@@ -36,7 +39,7 @@ public class DeveloperController {
 
     // Parenthèses optionnelles si pas de paramètres à une annotation
     @PostMapping
-    public void create(@RequestBody Developer developer) {
+    public void create(@RequestBody DeveloperCreate developer) {
 	System.out.println(developer);
     }
 
@@ -64,13 +67,14 @@ public class DeveloperController {
      */
     @PatchMapping("/{pseudo}/birth-date")
     public void updateBirthDate(@PathVariable("pseudo") String pseudo,
-	    @RequestBody Developer partial) {
-	System.out.println("Partial object=" + partial);
-	Developer developer = new Developer();
-	developer.setPseudo(pseudo); // Variable de chemin
-	developer.setFirstName(partial.getFirstName()); // Anomalie
-	developer.setLastName("MARSHALL");
-	developer.setBirthDate(partial.getBirthDate()); // JSON
-	System.out.println("New object=" + developer);
+	    @Valid @RequestBody DeveloperUpdate partial) {
+	// System.out.println("Partial object=" + partial);
+	// DeveloperCreate developer = new DeveloperCreate();
+	// developer.setPseudo(pseudo); // Variable de chemin
+	// developer.setFirstName(partial.getFirstName()); // Anomalie
+	// developer.setLastName("MARSHALL");
+	// developer.setBirthDate(partial.getBirthDate()); // JSON
+	System.out.println("Update birth date of: " + pseudo
+		+ " with new date : " + partial.getBirthDate());
     }
 }
