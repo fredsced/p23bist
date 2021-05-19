@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.formation.developers.domain.Skill;
+import fr.formation.developers.domain.dtos.SkillCreate;
+import fr.formation.developers.domain.dtos.SkillView;
+import fr.formation.developers.services.SkillService;
 
 /**
  * Une classe qui expose un ensemble de ressources de type "Skill". Le terme
@@ -54,6 +56,13 @@ import fr.formation.developers.domain.Skill;
 @RequestMapping("/skills")
 public class SkillController {
 
+    // @Autowired // JEE = @Inject
+    private final SkillService service;
+
+    public SkillController(SkillService service) {
+	this.service = service;
+    }
+
     /**
      * Retourne la compétence dont l'identifant est "id". En Java nous déclarons
      * retourner un objet (instance) de type "Skill" mais Spring, en s'appuyant
@@ -74,10 +83,8 @@ public class SkillController {
      * @return la compétence dont l'identifiant est "id"
      */
     @GetMapping("/{id}")
-    public Skill getById(@PathVariable("id") Long id) {
-	Skill skill = new Skill();
-	skill.setName("Spring boot " + id);
-	return skill;
+    public SkillView getById(@PathVariable("id") Long id) {
+	return service.getById(id);
     }
 
     /**
@@ -96,7 +103,12 @@ public class SkillController {
      *        "Skill"
      */
     @PostMapping
-    public void create(@Valid @RequestBody Skill skill) {
-	System.out.println(skill);
+    public void create(@Valid @RequestBody SkillCreate dto) {
+	service.create(dto);
+    }
+
+    @GetMapping("/{name}/by-name")
+    public SkillView getByName(@PathVariable("name") String name) {
+	return service.getByName(name);
     }
 }

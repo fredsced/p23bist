@@ -1,6 +1,6 @@
-package fr.formation.developers.domain;
+package fr.formation.developers.domain.dtos;
 
-import javax.validation.constraints.NotNull;
+import fr.formation.developers.validation.Uppercase;
 
 /**
  * Classe qui représente une compétence simple avec son nom.
@@ -10,15 +10,15 @@ import javax.validation.constraints.NotNull;
  * s'appuient dessus notamment pour réaliser les mappings (par ex. JSON => objet
  * Java et inversement).
  */
-public class Skill {
+public class SkillCreate {
 
-    @NotNull
+    @Uppercase
     private String name; // Variable d'instance private
 
     /**
      * Construit un nouvel objet (instance) de type "Skill".
      */
-    public Skill() {
+    public SkillCreate() {
 	// Constructeur public et sans argument
     }
 

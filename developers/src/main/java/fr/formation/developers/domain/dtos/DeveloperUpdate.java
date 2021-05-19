@@ -1,4 +1,4 @@
-package fr.formation.developers.domain;
+package fr.formation.developers.domain.dtos;
 
 import java.time.LocalDate;
 
