@@ -39,16 +39,24 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- Les dépendances pour la validation étaient présentes dans le starter-web
-		avant Spring boot 2.3, à partir de 2.3 il faut explicitement ajouter un starter -->
+		<!-- Les dépendances pour la validation étaient présentes dans le starter-web 
+			avant Spring boot 2.3, à partir de 2.3 il faut explicitement ajouter un starter. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+		<!-- Starter pour ajouter les dépendances JPA/Hibernate. -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		<!-- Dépendance pour permettre la connexion et la communication entre un 
+			programme Java avec une base de données MySQL. Ne pas préciser la version 
+			indique de lier la dernière version disponible. Scope runtime : indique que 
+			la dépendance est utile à l'exécution, par défaut c'est à la compilation 
+			(compile). Runtime répond aux besoins car aucune référence explicite (imports) 
+			aux classes du driver n'est nécessaire. L'application s'appuie sur ces classes 
+			uniquement à l'exécution. -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>

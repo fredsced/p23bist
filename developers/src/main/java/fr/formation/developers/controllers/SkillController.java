@@ -57,8 +57,22 @@ import fr.formation.developers.services.SkillService;
 public class SkillController {
 
     // @Autowired // JEE = @Inject
+    /*
+     * Pour injecter le service par constructeur (vs champ avec @Autowired) on
+     * déclare le champ du type souhaité qui peut être marqué "final" ce qui
+     * évite de potentiels effets de bords car un champ "final" ne peut être
+     * réassigné. Il ne peut être assigné qu'à la déclaration de la variable ou
+     * à la construction, ce que nous faisons ici.
+     */
     private final SkillService service;
 
+    /**
+     * Construit un "SkillController" avec le service spécifié. C'est Spring qui
+     * instancie le controller.
+     *
+     * @param service une instance de "SkillService" instancié et injectée par
+     *        Spring
+     */
     public SkillController(SkillService service) {
 	this.service = service;
     }
@@ -104,7 +118,13 @@ public class SkillController {
      */
     @PostMapping
     public void create(@Valid @RequestBody SkillCreate dto) {
-	service.create(dto);
+	/*
+	 * Le controller a assuré toutes ses responsabilités, directement ou
+	 * indirectement (exposition du endpoint, conversion du Json en instance
+	 * de DTO, validation), on confie le reste des traitements à la couche
+	 * service.
+	 */
+	service.create(dto); // Au service de faire le reste du traitement
     }
 
     @GetMapping("/{name}/by-name")

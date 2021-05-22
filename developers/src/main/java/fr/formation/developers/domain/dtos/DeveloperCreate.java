@@ -4,6 +4,11 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Un DTO représentant tous les inputs du client, généralement pour un endpoint
+ * donné, on y précise les contraintes de validation par champ et/ou par classe
+ * dans le cas d'une validation nécessitant d'accéder à plusieurs champs.
+ */
 public class DeveloperCreate {
 
     @NotNull
