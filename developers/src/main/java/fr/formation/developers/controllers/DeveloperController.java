@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.formation.developers.domain.dtos.DeveloperCreate;
 import fr.formation.developers.domain.dtos.DeveloperUpdate;
+import fr.formation.developers.domain.dtos.DeveloperView;
+import fr.formation.developers.domain.dtos.IDeveloperView;
 import fr.formation.developers.services.DeveloperService;
 
 @RestController
@@ -32,13 +34,13 @@ public class DeveloperController {
     }
 
     @GetMapping("/{pseudo}")
-    public DeveloperCreate getByPseudo(@PathVariable("pseudo") String pseudo) {
+    public DeveloperView getByPseudo(@PathVariable("pseudo") String pseudo) {
 	return service.getByPseudo(pseudo);
     }
 
     // Parenthèses optionnelles si pas de paramètres à une annotation
     @PostMapping
-    public void create(@RequestBody DeveloperCreate developer) {
+    public void create(@Valid @RequestBody DeveloperCreate developer) {
 	service.create(developer);
     }
 
@@ -68,5 +70,14 @@ public class DeveloperController {
     public void updateBirthDate(@PathVariable("pseudo") String pseudo,
 	    @Valid @RequestBody DeveloperUpdate partial) {
 	service.updateBirthDate(pseudo, partial);
+    }
+
+    /**
+     * Endpoint "fourre-tout" pour simplifier certains tests côté
+     * service/repository.
+     */
+    @GetMapping("/find")
+    public IDeveloperView find() {
+	return service.find();
     }
 }
