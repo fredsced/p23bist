@@ -23,6 +23,9 @@ public class DeveloperCreate {
     @NotNull
     private LocalDate birthDate;
 
+    @NotNull
+    private Long mainSkillId;
+
     public DeveloperCreate() {
 	//
     }
@@ -57,6 +60,14 @@ public class DeveloperCreate {
 
     public void setBirthDate(LocalDate birthDate) {
 	this.birthDate = birthDate;
+    }
+
+    public Long getMainSkillId() {
+	return mainSkillId;
+    }
+
+    public void setMainSkillId(Long mainSkillId) {
+	this.mainSkillId = mainSkillId;
     }
 
     @Override

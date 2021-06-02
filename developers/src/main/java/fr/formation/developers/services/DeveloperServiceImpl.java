@@ -7,20 +7,26 @@ import fr.formation.developers.domain.dtos.DeveloperUpdate;
 import fr.formation.developers.domain.dtos.DeveloperView;
 import fr.formation.developers.domain.dtos.IDeveloperView;
 import fr.formation.developers.domain.entities.Developer;
+import fr.formation.developers.domain.entities.Skill;
 import fr.formation.developers.repositories.DeveloperRepository;
+import fr.formation.developers.repositories.SkillRepository;
 
 @Service
 public class DeveloperServiceImpl implements DeveloperService {
 
-    private final DeveloperRepository repo;
+    private final DeveloperRepository developers;
 
-    public DeveloperServiceImpl(DeveloperRepository repo) {
-	this.repo = repo;
+    private final SkillRepository skillRepo;
+
+    public DeveloperServiceImpl(DeveloperRepository developers,
+	    SkillRepository skillRepo) {
+	this.developers = developers;
+	this.skillRepo = skillRepo;
     }
 
     @Override
     public DeveloperView getByPseudo(String pseudo) {
-	Developer entity = repo.findByPseudo(pseudo).get();
+	Developer entity = developers.findByPseudo(pseudo).get();
 	DeveloperView view = new DeveloperView();
 	view.setPseudo(entity.getPseudo());
 	view.setFirstName(entity.getFirstName());
@@ -36,7 +42,13 @@ public class DeveloperServiceImpl implements DeveloperService {
 	entity.setFirstName(dto.getFirstName());
 	entity.setLastName(dto.getLastName());
 	entity.setBirthDate(dto.getBirthDate());
-	repo.save(entity);
+	Long mainSkillId = dto.getMainSkillId();
+	// Ca marche mais y'a mieux pour une association avec un objet
+	// préexistant :
+	// Skill skill = skillRepo.findById(mainSkillId).get(); //
+	Skill skill = skillRepo.getOne(mainSkillId); //
+	entity.setMainSkill(skill); //
+	developers.save(entity);
     }
 
     /**
@@ -48,15 +60,15 @@ public class DeveloperServiceImpl implements DeveloperService {
      */
     @Override
     public void updateBirthDate(String pseudo, DeveloperUpdate partial) {
-	Developer entity = repo.findByPseudo(pseudo).get();
+	Developer entity = developers.findByPseudo(pseudo).get();
 	entity.setBirthDate(partial.getBirthDate());
-	repo.save(entity);
+	developers.save(entity);
     }
 
     @Override
     public IDeveloperView find() {
 	String firstName = "Frank";
 	String lastName = "MARSHALL";
-	return repo.findByFirstNameAndLastName(firstName, lastName).get();
+	return developers.findByFirstNameAndLastName(firstName, lastName).get();
     }
 }

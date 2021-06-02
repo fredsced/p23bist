@@ -35,7 +35,7 @@ public class Skill {
     private Long id;
 
     // On précise le nom de la colonne correspondante au champ
-    @Column(name = "skill_name", nullable = false)
+    @Column(name = "skill_name", nullable = false, unique = true)
     private String name;
 
     public Skill() {

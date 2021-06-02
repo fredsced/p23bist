@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,17 +19,29 @@ public class Developer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "pseudonyme")
+    @Column(name = "pseudonyme", unique = true, nullable = false)
     private String pseudo;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", nullable = false)
     private LocalDate birthDate;
+
+    // 1 Developer maitrise 1 Skill
+    // 1 Skill est maitrisee par N Developer
+    //
+    // 1 Developer ToOne Skill
+    // Many Developers to One Skill
+    // 1 Skill ToMany Developer
+    // One Skill toMany Developers
+    // @Many(Developers)ToOne(Skill)
+    @ManyToOne
+    @JoinColumn(name = "main_skill_id", nullable = false)
+    private Skill mainSkill;
 
     public Developer() {
 	//
@@ -71,5 +85,13 @@ public class Developer {
 
     public void setBirthDate(LocalDate birthDate) {
 	this.birthDate = birthDate;
+    }
+
+    public Skill getMainSkill() {
+	return mainSkill;
+    }
+
+    public void setMainSkill(Skill mainSkill) {
+	this.mainSkill = mainSkill;
     }
 }
