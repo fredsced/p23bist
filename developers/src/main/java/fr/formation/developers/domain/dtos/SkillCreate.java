@@ -1,5 +1,8 @@
 package fr.formation.developers.domain.dtos;
 
+import javax.validation.constraints.NotBlank;
+
+import fr.formation.developers.validation.UniqueSkillName;
 import fr.formation.developers.validation.Uppercase;
 
 /**
@@ -12,6 +15,8 @@ import fr.formation.developers.validation.Uppercase;
  */
 public class SkillCreate {
 
+    @NotBlank
+    @UniqueSkillName
     @Uppercase
     private String name; // Variable d'instance private
 

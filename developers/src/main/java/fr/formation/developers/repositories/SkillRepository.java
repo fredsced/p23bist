@@ -45,4 +45,6 @@ public interface SkillRepository extends JpaRepository<Skill, Long> {
      *         de compétence avec ce nom
      */
     Optional<Skill> findByName(String name);
+
+    boolean existsByName(String value); // true if exists
 }

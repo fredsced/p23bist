@@ -2,6 +2,7 @@ package fr.formation.developers.domain.dtos;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -11,13 +12,13 @@ import javax.validation.constraints.NotNull;
  */
 public class DeveloperCreate {
 
-    @NotNull
+    @NotBlank
     private String pseudo;
 
-    @NotNull
+    @NotBlank
     private String firstName;
 
-    @NotNull
+    @NotBlank
     private String lastName;
 
     @NotNull

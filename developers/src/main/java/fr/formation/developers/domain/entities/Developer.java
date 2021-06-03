@@ -13,7 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "developers")
-public class Developer {
+public class Developer { // insert into developer ... => exception table does
+			 // not exists
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +39,8 @@ public class Developer {
     // Many Developers to One Skill
     // 1 Skill ToMany Developer
     // One Skill toMany Developers
-    // @Many(Developers)ToOne(Skill)
+    // Many(Developers)ToOne(Skill)
+    // One(Skill)ToMany(Developers)
     @ManyToOne
     @JoinColumn(name = "main_skill_id", nullable = false)
     private Skill mainSkill;
